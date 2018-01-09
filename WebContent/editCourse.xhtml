@@ -21,7 +21,48 @@
 					    <f:validateLength minimum="3" maximum="10" />
 					</h:inputText>
                 </tr>
-            
+                <tr>
+					<h:outputText value="Input text&#160;:" />
+					<h:panelGroup>
+					    <h:inputText id="text" value="#{formTest.text}" required="true"
+					        requiredMessage="Le nom est obligatoire">
+					        <f:validateLength minimum="3" maximum="15" />
+					        <f:validator for="text" validatorId="myconstraints.Hello" />
+					    </h:inputText>
+					    <h:message errorClass="error" for="text" />
+					</h:panelGroup>
+                </tr>
+                <tr>
+	                <h:outputText value="Input date&#160;:" />
+						<h:panelGroup>
+						    <h:inputText id="birthday" value="#{formTest.birthday}"
+						        label="Birthday">
+						        <f:convertDateTime pattern="dd-MM-yyyy" />
+						    </h:inputText>
+						    <h:message errorClass="error" for="birthday" />
+						</h:panelGroup>
+				</tr>
+				<tr>
+					<h:outputText value="Output date&#160;:" />
+					<h:outputText value="#{formTest.birthday}">
+					        <f:convertDateTime pattern="dd-MM-yyyy" />
+					</h:outputText>
+				</tr> 
+
+				
+				<tr>
+					<h:outputText value="Input number&#160;:" />
+						<h:panelGroup>
+						    <h:inputText id="number" value="#{formTest.number}" required="true"
+						        valueChangeListener="#{formTest.numberChanged}">
+						        <f:validateLongRange minimum="50" />
+						        <f:convertNumber type="currency" currencySymbol="$"
+						            minFractionDigits="2" maxFractionDigits="3" />
+						    </h:inputText>
+						    <h:message errorClass="error" for="number" />
+						</h:panelGroup>
+				</tr>
+				         
                 <tr>
                     <td><h:outputText value="Hours :" /></td>
                     <td><h:inputText id="hours" value="#{c.hours}" />
@@ -37,10 +78,24 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <h:commandButton
-                            action="#{course.save()}" value="Save" /> | 
-                        <h:link outcome="courses" value="List of courses" />
+<!--                         <h:commandButton -->
+<!--                             action="#{course.save()}" value="Save" /> |  -->
+<!--                         <h:link outcome="courses" value="List of courses" /> -->
+                        <h:commandButton value="Submit" action="#{formTest.submit}">
+					    <f:attribute name="forActionlistener" value="Hello" />
+					    <f:actionListener type="monapp.MyActionListener" />
+						</h:commandButton>
                     </td>
+                </tr>
+                <tr>
+	                <h:commandButton value="Submit" action="#{formTest.submit}"
+					    actionListener="#{formTest.myListener}">
+					    <f:setPropertyActionListener target="#{formTest.parameter}"
+					        value="Fin" />
+					    <f:attribute name="forActionlistener" value="Hello" />
+					    <f:actionListener type="monapp.MyActionListener" />
+					</h:commandButton>
+					<span></span>
                 </tr>
                 <tr>
                 <td colspan="2">

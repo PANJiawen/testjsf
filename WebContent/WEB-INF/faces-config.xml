@@ -28,6 +28,10 @@
         <to-view-id>/hello.xhtml</to-view-id>
     </navigation-case>
 	</navigation-rule>
+	
+	<lifecycle>
+        <phase-listener>monapp.MyPhaseListener</phase-listener>
+    </lifecycle>
     
 
 </faces-config>
